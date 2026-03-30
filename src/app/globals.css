@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --brand:    #f97316;
+  --brand-dk: #ea580c;
+  --ink:      #0f0a00;
+  --cream:    #fdf8f0;
+  --lime:     #c8f135;
+  --rose:     #f43f5e;
+  --blue:     #3b82f6;
+  --violet:   #7c3aed;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f5ede0; }
+::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 3px; }
+
+/* ── Utility classes ── */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition-all duration-200 active:scale-95 shadow-md hover:shadow-lg;
+    font-family: var(--font-display);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-ink text-cream font-semibold rounded-xl transition-all duration-200 active:scale-95;
+    font-family: var(--font-display);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 hover:bg-orange-50 text-ink font-medium rounded-lg transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-orange-100 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .card-pop {
+    @apply bg-white rounded-2xl border-2 border-ink shadow-[4px_4px_0px_0px_#0f0a00] hover:shadow-[6px_6px_0px_0px_#0f0a00] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all duration-200;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 bg-white border-2 border-orange-100 rounded-xl focus:outline-none focus:border-brand-500 transition-colors duration-200 font-body;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-display font-bold text-ink;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-600 to-rose-500 bg-clip-text text-transparent;
+  }
+
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+}
+
+/* ── Animations ── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pop {
+  0%   { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.animate-slide-up  { animation: slideUp 0.5s ease forwards; }
+.animate-fade-in   { animation: fadeIn  0.4s ease forwards; }
+.animate-pop       { animation: pop     0.3s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* ── Skeleton shimmer ── */
+.skeleton {
+  background: linear-gradient(90deg, #f5ede0 25%, #fdf8f0 50%, #f5ede0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ── Hero diagonal bg ── */
+.hero-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+}
+
+/* ── Ticker scroll animation ── */
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: scroll 20s linear infinite;
+}
+
+/* ── Star rating ── */
+.star-filled { color: #f97316; }
+.star-empty  { color: #fed7aa; }
